@@ -1,0 +1,56 @@
+﻿@model TruYum.ViewModel.NewCreateViewModel
+
+
+<h1>Edit</h1>
+<h5>MenuItem</h5>
+<div class="container">
+<div class="row">
+<div class="col"></div>
+<div class="col-6">
+@using(@Html.BeginForm("Editing","MenuItems"))
+{
+<div class= "form-group">
+    @Html.LabelFor(m=>m.MenuItem.Name)
+    @Html.TextBoxFor(m=>m.MenuItem.Name, new {@class="form-control"})
+</div>
+<div class="checkbox">
+ <label>
+     Free Delivery @Html.CheckBoxFor(m=>m.MenuItem.IsFreeDelivered)
+ </label>
+</div>
+<div class= "form-group">
+    @Html.LabelFor(m=>m.MenuItem.Price)
+    @Html.TextBoxFor(m=>m.MenuItem.Price, new {@class="form-control"})
+</div>
+<div class= "form-group">
+    @Html.LabelFor(m=>m.MenuItem.DateOfLaunch)
+    @Html.EditorFor(m=>m.MenuItem.DateOfLaunch,"{0:yyyy-MM-dd}" ,new {@class="form-control"})
+</div>
+<div class="checkbox">
+    <label>
+     Active @Html.CheckBoxFor(m=>m.MenuItem.IsActive)
+     </label>
+</div>
+<div class="form-group">
+     @Html.LabelFor(m=>m.MenuItem.CategoryId)<br>
+   @*@Html.DropDownListFor(m=>m.MenuItem.CategoryId, new SelectList(Model.Categories,"CategoryId","Name"),"Main Course" ,new {@class="form-control"})*@
+   @Html.DropDownListFor(model => model.MenuItem.CategoryId, ViewBag.Category as SelectList, new{@class="form-control"})
+</div>
+<br />
+@Html.HiddenFor(m=>m.MenuItem.MenuItemId)
+<div class="form-group">
+    <button type="Submit" class="btn btn-light">Save</button>
+</div>
+}
+<div>@Html.ActionLink("Back To List","Index","MenuItems",new {isAdmin=true})</div>
+</div>
+<div class="col"></div>
+</div>
+</div>
+
+ <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+ <script>
+  $( function() {
+      $("#Date").datepicker({ dateFormat:"YYYY-MM-DD"});
+  } );
+</script>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<TruYum.ViewModel.NewCreateViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<h2>Menu items</h2>
+<div><a asp-controller="MenuItems" asp-action="New">Create New</a></div>
+<div>
+ @using(@Html.BeginForm())
+  {
+<table #id=t01 class="table table-responsive table-hover">  
+    <tr>  
+            <th>Name</th>
+            <th>Price</th>
+            <th>Active</th>
+            <th>Date of Launch</th>
+            <th>Name</th>
+            <th>Free Delivery</th>
+            <th>Action</th>
+    </tr>  
+    @foreach (var item in Model)  
+    {  
+        <tr>  
+           <td>@item.MenuItem.Name</td>
+         <td>@item.MenuItem.Price</td>
+         <td>@Html.CheckBoxFor(m=>item.MenuItem.IsActive)</td>
+        <td>@item.MenuItem.DateOfLaunch</td>
+         <td>@item.Categories.Name</td>
+         <td>@Html.CheckBoxFor(m=>item.MenuItem.IsFreeDelivered)</td>
+         <td>@Html.ActionLink("Edit", "Edit", "MenuItems", new {id=@item.MenuItem.MenuItemId })</td>
+  
+        </tr>  
+    }  
+</table> 
+}
+
+</div>
+    
+  <style>
+table#t01 {  
+width: 100%;  
+background-color: #f1f1c1;  
+}  
+  
+table#t01 tr:nth-child(even) {  
+background-color: #eee;  
+}  
+table#t01 tr:nth-child(odd) {  
+background-color: #fff;  
+}  
+table#t01 th {  
+color: white;  
+background-color:blue;  
+}    
+th, td {  
+padding: 15px;
+}  
+</style>

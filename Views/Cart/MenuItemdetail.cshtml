@@ -1,0 +1,64 @@
+﻿@model IEnumerable<TruYum.ViewModel.CartMenu>
+@{
+    ViewBag.Title = "MenuItemDetail";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<h2>View Cart</h2>
+
+@if(Model.Count()==0){
+
+    <p>No items in cart  @Html.ActionLink("View menu items","Index", "MenuItems" )</p>
+}
+else{
+<div> 
+ @using(@Html.BeginForm())
+  {
+<table #id=t01 class="table table-responsive table-hover">  
+    <tr>  
+            <th>Name</th>
+            <th>Free Delivery</th>
+            <th>Price</th>
+           <th></th>
+    </tr>  
+    @foreach (var item in Model)  
+    {  
+        <tr>  
+           <td>@item.MenuItem.Name</td>
+           <td>@Html.CheckBoxFor(m=>item.MenuItem.IsFreeDelivered)</td>
+           <td>@item.MenuItem.Price</td>
+           <td>@Html.ActionLink("Remove","Remove", "Cart", new {id=item.Cart.Id })</td>
+        @* @Html.HiddenFor(m=>item.MenuItem.MenuItemId)*@
+  
+        </tr>  
+    }  
+</table> 
+}
+</div>
+
+
+<div>@Html.ActionLink("View Menu Items","Index","MenuItems")</div>
+}
+    
+  <style>
+table#t01 {  
+width: 100%;  
+background-color: #f1f1c1;  
+}  
+  
+table#t01 tr:nth-child(even) {  
+background-color: #eee;  
+}  
+table#t01 tr:nth-child(odd) {  
+background-color: #fff;  
+}  
+table#t01 th {  
+color: white;  
+background-color:blue;  
+}    
+th, td {  
+padding: 15px;
+}  
+</style>
+
